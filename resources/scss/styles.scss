@@ -1,0 +1,237 @@
+.bsb-timeline-1{
+    --bsb-tl-color:var(--bs-primary-bg-subtle);
+    --bsb-tl-circle-color:var(--bs-primary);
+    --bsb-tl-circle-size:18px;
+    --bsb-tl-circle-offset:9px
+}
+.bsb-timeline-1 .timeline{
+    list-style:none;
+    margin:0;
+    padding:0;
+    position:relative
+}
+.bsb-timeline-1 .timeline:after{
+    background-color:var(--bsb-tl-color);
+    bottom:0;
+    content:"";
+    left:0;
+    margin-left:-1px;
+    position:absolute;
+    top:0;
+    width:2px
+}
+.bsb-timeline-1 .timeline>.timeline-item{
+    margin:0;
+    padding:0;
+    position:relative
+}
+.bsb-timeline-1 .timeline>.timeline-item:before{
+    background-color:var(--bsb-tl-circle-color);
+    border-radius:50%;
+    content:"";
+    height:var(--bsb-tl-circle-size);
+    left:calc(var(--bsb-tl-circle-offset)*-1);
+    position:absolute;
+    top:0;
+    width:var(--bsb-tl-circle-size);
+    z-index:1
+}
+.bsb-timeline-1 .timeline>.timeline-item .timeline-body{
+    margin:0;
+    padding:0;
+    position:relative
+}
+.bsb-timeline-1 .timeline>.timeline-item .timeline-content{
+    padding:0 0 2.5rem 2.5rem
+}
+@media(min-width:768px){
+    .bsb-timeline-1 .timeline>.timeline-item .timeline-content{
+        padding-bottom:3rem
+    }
+}
+.bsb-timeline-1 .timeline>.timeline-item:last-child .timeline-content{
+    padding-bottom:0
+}
+
+// Navbar
+#navbar {
+    transition: transform 0.3s ease-in-out;
+}
+
+#navbar.navbar-hidden {
+    transform: translateY(-100%);
+}
+
+.navbar {
+    .nav-item {
+        .nav-link {
+            // Warna saat link dalam keadaan aktif (class .active)
+            &.active {
+                color: $primary !important; // Gunakan !important jika tertimpa gaya default bootstrap
+                font-weight: 600; // Opsional: agar lebih menonjol
+            }
+
+            // Opsional: Warna saat di-hover agar konsisten
+            &:hover {
+                color: tint-color($primary, 20%);
+            }
+        }
+    }
+}
+
+.form-control {
+    transition: all 0.3s ease;
+
+    &:focus {
+        box-shadow: 0 4px 12px rgba($primary, 0.15) !important;
+        border-color: $primary;
+        // transform: translateY(-1px); // Sedikit mengangkat saat diketik
+    }
+}
+
+h3 {
+    letter-spacing: -0.5px;
+}
+
+.badge {
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.hero-section {
+    padding: 100px 0;
+
+    .main-title {
+        letter-spacing: -2px;
+        line-height: 1.1;
+        font-weight: 900;
+    }
+
+    .text-gradient {
+        background: linear-gradient(45deg, $primary, tint-color($primary, 30%));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    // Efek Tombol Glow
+    .btn-glow {
+        transition: all 0.3s ease;
+        &:hover {
+            box-shadow: 0 10px 25px rgba($primary, 0.4) !important;
+            transform: translateY(-2px);
+        }
+    }
+
+    // Background Blobs (Dekorasi halus)
+    .hero-blob {
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        background: rgba($primary, 0.05);
+        filter: blur(80px);
+        border-radius: 50%;
+        z-index: 0;
+
+        &-1 { top: -100px; right: -100px; }
+        &-2 { bottom: -50px; left: -150px; background: rgba(blue, 0.03); }
+    }
+}
+
+.tracking-tight { letter-spacing: -0.05em; }
+
+// Gunakan margin-top atau padding-top yang sesuai dengan tinggi navbar kamu
+main#wrapper {
+    // Memberikan jarak atas agar tidak tertutup/mepet navbar
+    // Jika navbar kamu tingginya sekitar 70px, berikan sedikit extra space
+    margin-top: 0.5rem;
+
+    // Smooth transition saat pindah halaman (Inertia)
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+footer {
+    .hover-primary {
+        transition: color 0.2s ease;
+        &:hover {
+            color: $primary !important;
+        }
+    }
+
+    .x-small {
+        font-size: 0.75rem;
+    }
+
+    h6 {
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+    }
+}
+
+.x-small { font-size: 0.75rem; }
+
+@each $key, $value in $theme-colors {
+    .dropdown-user .dropdown-item.dropdown-item-#{$key} {
+        transition: all 0.2s ease;
+        &:hover {
+            background-color: rgba($value, 0.05);
+            // transform: translateX(5px); // Efek geser sedikit saat hover
+        }
+    }
+}
+
+.artist-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 20px;
+
+    .card-img-wrapper {
+        border-radius: 20px 20px 0 0;
+        aspect-ratio: 16 / 9; // Menjaga gambar tetap proporsional
+
+        img {
+            object-fit: cover;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+    }
+
+    &:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+
+        img {
+            transform: scale(1.1); // Efek zoom halus pada gambar
+        }
+
+        .btn-outline-primary {
+            background-color: var(--bs-primary);
+            color: white;
+        }
+    }
+}
+
+// Menghindari teks kepanjangan (maksimal 2 baris)
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.blur-shadow {
+    backdrop-filter: blur(4px);
+}
