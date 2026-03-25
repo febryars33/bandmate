@@ -14,13 +14,13 @@ class ArtistController extends Controller
     public function index(Request $request)
     {
         return Inertia::render('Artist/Index', [
-            'meta'      =>  [
-                'title' =>  'Daftar Artist & Band Terpopuler',
-                'description'   =>  'Temukan daftar artist, band, dan musisi berbakat. Cari profil lengkap, jadwal manggung, dan karya terbaru dari musisi favorit Anda.',
+            'meta' => [
+                'title' => 'Daftar Artist & Band Terpopuler',
+                'description' => 'Temukan daftar artist, band, dan musisi berbakat. Cari profil lengkap, jadwal manggung, dan karya terbaru dari musisi favorit Anda.',
             ],
-            'artists'   =>  Inertia::scroll(function() use ($request) {
+            'artists' => Inertia::scroll(function () use ($request) {
                 return Artist::query()
-                    ->when($request->filled('search'), function($query) use ($request) {
+                    ->when($request->filled('search'), function ($query) use ($request) {
                         $search = $request->string('search');
                         if (strlen($search) < 3) {
                             return $query->where('name', 'like', "%{$search}%");
@@ -28,13 +28,13 @@ class ArtistController extends Controller
 
                         return $query->whereFullText(['name', 'about'], "$search*", ['mode' => 'boolean'])
                             ->orWhere('name', 'like', "%{$search}%")
-                            ->orWhereRaw("SOUNDEX(name) = SOUNDEX(?)", [$search]);
+                            ->orWhereRaw('SOUNDEX(name) = SOUNDEX(?)', [$search]);
                     })
                     ->latest()
                     ->paginate(10)
                     ->withQueryString();
             }),
-            'filters'   =>  $request->only(['search'])
+            'filters' => $request->only(['search']),
         ]);
     }
 

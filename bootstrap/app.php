@@ -47,7 +47,7 @@ return Application::configure(basePath: dirname(__DIR__))
             //
         });
 
-        $exceptions->respond(function(Response $response, Throwable $exception, Request $request) {
+        $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
             if (! app()->environment(['local', 'testing']) && in_array($response->getStatusCode(), [Response::HTTP_INTERNAL_SERVER_ERROR, Response::HTTP_SERVICE_UNAVAILABLE, Response::HTTP_NOT_FOUND, Response::HTTP_FORBIDDEN])) {
                 return Inertia::render('ErrorPage', ['status' => $response->getStatusCode()])
                     ->toResponse($request)
