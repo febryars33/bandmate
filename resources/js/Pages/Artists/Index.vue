@@ -2,15 +2,6 @@
     <Head>
         <title>{{ meta.title }}</title>
         <meta name="description" :content="meta.description" />
-
-        <!-- Open Graph (Facebook/WA) -->
-        <!-- <meta property="og:title" content="Daftar Artist & Band Terpopuler" />
-        <meta property="og:description" content="Temukan profil lengkap musisi berbakat di platform kami." />
-        <meta property="og:type" content="website" /> -->
-
-        <!-- Twitter -->
-        <!-- <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Eksplorasi Artist & Band" /> -->
     </Head>
 
     <div class="container">
@@ -18,29 +9,48 @@
             <div class="col-lg-3 mb-5">
                 <div class="d-flex justify-content-between mb-3">
                     <h3 class="m-0">Filter Band</h3>
-                    <button type="button" class="btn btn-sm btn-outline-danger">
+                    <button type="button" class="btn btn-sm btn-outline-danger" :disabled="!hasActiveFilters()" @click="resetFilters">
                         <i class="bi bi-trash"></i>
                     </button>
                 </div>
-                <form>
-                    <div class="mb-3 position-relative">
-                        <label class="form-label">Lokasi (Kota / Kabupaten)</label>
-                        <input type="search" class="form-control" placeholder="Cari Kota / Kabupaten..." />
+                <form @submit.prevent="applyFilters">
+                    <div class="mb-3">
+                        <label for="regency" class="form-label fw-bold">Pilih Kota / Kabupaten</label>
+                        <MultiSelect
+                            id="regency"
+                            :fetchUrl="regencyUrl"
+                            :search="true"
+                            :paginate="true"
+                            v-model="selectedRegencies"
+                            :options="regencies.data"
+                            placeholder="Pilih Kota / Kabupaten"
+                            :initialNextPageUrl="regencyUrl"
+                        />
                     </div>
                     <div class="mb-3">
-                        <label for="genres" class="form-label">Genre</label>
+                        <label for="genre" class="form-label fw-bold">Genre</label>
+                        <MultiSelect
+                            id="genre"
+                            :fetchUrl="genreUrl"
+                            :search="true"
+                            :paginate="true"
+                            v-model="selectedGenres"
+                            :options="genres.data"
+                            placeholder="Pilih Genre..."
+                            :initialNextPageUrl="genreUrl"
+                        />
                     </div>
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-primary">Terapkan Filter</button>
+                        <button type="submit" class="btn btn-primary rounded-pill fw-bold py-2">Terapkan Filter</button>
                     </div>
                 </form>
             </div>
+
             <div class="col-lg-9">
                 <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
                     <div>
                         <div class="d-flex align-items-center gap-2">
                             <h3 class="fw-bold m-0">Daftar Band</h3>
-                            <!-- Badge Counter -->
                             <span v-if="artists.total > 0" class="badge rounded-pill bg-primary-subtle text-primary fw-medium px-3 animate-fade-in">
                                 {{ artists.total }}
                             </span>
@@ -51,7 +61,6 @@
                         </p>
                     </div>
 
-                    <!-- Kolom Search yang tadi -->
                     <div class="col-md-5 col-lg-4 position-relative">
                         <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
                         <input
@@ -65,12 +74,10 @@
                 </div>
 
                 <template v-if="artists.data.length > 0">
-                    <InfiniteScroll data="artists" :key="props.filters.search">
+                    <InfiniteScroll data="artists" :key="filters.search">
                         <div class="row g-4">
-                            <!-- Tambahkan gutter g-4 agar jarak antar kartu konsisten -->
                             <div v-for="artist in artists.data" :key="artist.id" class="col-lg-6">
                                 <div class="card h-100 border-0 shadow-sm artist-card">
-                                    <!-- Image Wrapper dengan Aspect Ratio -->
                                     <div class="position-relative overflow-hidden card-img-wrapper">
                                         <img
                                             :src="'https://placehold.co/600x300?font=poppins&text=' + artist.name"
@@ -78,10 +85,9 @@
                                             alt="Artist Image"
                                             loading="lazy"
                                         />
-                                        <!-- Badge Lokasi Melayang (Floating) -->
-                                        <div class="position-absolute bottom-0 start-0 m-3">
+                                        <div v-if="artist.regency" class="position-absolute bottom-0 start-0 m-3">
                                             <span class="badge bg-dark bg-opacity-75 blur-shadow py-2 px-3 rounded-pill small">
-                                                <i class="bi bi-geo-alt-fill me-1 text-primary"></i> Jakarta Selatan
+                                                <i class="bi bi-geo-alt-fill me-1 text-primary"></i> {{ artist.regency.name }}
                                             </span>
                                         </div>
                                     </div>
@@ -93,7 +99,6 @@
                                                     {{ artist.name }}
                                                     <sup v-if="artist.is_verified" class="bi bi-patch-check-fill text-blue" />
                                                 </h5>
-
                                                 <div class="d-flex align-items-center gap-2 text-muted x-small">
                                                     <span class="d-flex align-items-center gap-1">
                                                         <i class="bi bi-music-note-list text-primary"></i>
@@ -114,14 +119,14 @@
                                         </div>
 
                                         <p class="card-text text-muted mb-4 line-clamp-2">
-                                            {{ artist.about || 'Musisi berbakat yang fokus pada aliran metalcore dengan sentuhan modern.' }}
+                                            {{ artist.about || DEFAULT_ARTIST_BIO }}
                                         </p>
                                     </div>
 
                                     <div class="card-footer d-grid bg-transparent">
-                                        <a role="button" class="btn btn-outline-primary rounded-pill fw-bold py-2">
-                                            Lihat Profil <i class="bi bi-arrow-right ms-1"></i>
-                                        </a>
+                                        <Link :href="show(artist.slug)" class="btn btn-outline-primary rounded-pill fw-bold py-2">
+                                            Lihat Band <i class="bi bi-arrow-right ms-1"></i>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -144,40 +149,51 @@
 </template>
 
 <script lang="ts" setup>
-import artistsRoute from '@/routes/artists'
-import type { Artist } from '@/types/models/artists'
+import API from '@/actions/App/Http/Controllers/API'
+import MultiSelect from '@/components/MultiSelect.vue'
+import { useArtistFilter } from '@/composables/useArtistFilter'
+import { genre } from '@/routes'
+import { show } from '@/routes/artists'
+import type { ArtistFilters } from '@/types/artists/filter'
+import type { Artist } from '@/types/models/artist'
+import type { Genre } from '@/types/models/genre'
+import type { Regency } from '@/types/models/regency'
 import type { Pagination } from '@/types/pagination'
-import { Head, InfiniteScroll, router } from '@inertiajs/vue3'
-import debounce from 'lodash/debounce'
-import { ref, watch } from 'vue'
+import { Head, InfiniteScroll, Link } from '@inertiajs/vue3'
 
-const props = defineProps<{
-    meta: {
-        title: string
-        description: string
-    }
+// ─── Constants ───────────────────────────────────────────────────────────────
+
+const DEFAULT_ARTIST_BIO = 'Musisi berbakat yang fokus pada aliran metalcore dengan sentuhan modern.'
+
+// ─── Interfaces ──────────────────────────────────────────────────────────────
+
+interface Meta {
+    title: string
+    description: string
+}
+
+interface Props {
+    meta: Meta
     artists: Pagination<Artist>
-    filters: {
-        search: string
-    }
-}>()
+    filters: ArtistFilters
+    regencies: Pagination<Regency>
+    genres: Pagination<Genre>
+}
 
-const search = ref(props.filters.search)
+// ─── Props ───────────────────────────────────────────────────────────────────
 
-watch(
-    search,
-    debounce((value: string) => {
-        const params: { search?: string } = {}
+const props = defineProps<Props>()
 
-        if (value) {
-            params.search = value
-        }
+// ─── URLs ────────────────────────────────────────────────────────────────────
 
-        router.get(artistsRoute.index(), params, {
-            preserveState: true,
-            replace: true,
-            preserveScroll: true,
-        })
-    }, 300),
-)
+const regencyUrl = API.Regional.RegencyController.url()
+const genreUrl = genre().url
+
+// ─── Filter ──────────────────────────────────────────────────────────────────
+
+const { search, selectedRegencies, selectedGenres, hasActiveFilters, applyFilters, resetFilters } = useArtistFilter({
+    search: props.filters.search ?? '',
+    regencies: props.filters.regencies ?? [],
+    genres: props.filters.genres ?? [],
+})
 </script>

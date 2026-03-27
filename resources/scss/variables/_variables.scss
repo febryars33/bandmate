@@ -141,7 +141,7 @@ $font-sizes: (
   14: 48px,
   ) !default;
 
-$border-width: 2px !default;
+// $border-width: 2px !default;
 
 // Line Heght
 $line-height-base: 1.5 !default;
@@ -185,16 +185,16 @@ $badge-border-radius: 15px;
 
 
 // Table
-$table-cell-padding-y: 16px !default;
-$table-cell-padding-x: 24px !default;
-$table-th-font-weight: 600 !default;
-$table-striped-bg: $gray-200 !default;
-$table-hover-bg: $gray-100 !default;
-$table-border-color: #111c2d0d !default;
-$table-bg: $white !default;
-$table-color: var(--bs-body-color) !default;
-$table-cell-padding-y-sm: 12px !default;
-$table-cell-padding-x-sm: 12px !default;
+// $table-cell-padding-y: 16px !default;
+// $table-cell-padding-x: 24px !default;
+// $table-th-font-weight: 600 !default;
+// $table-striped-bg: $gray-200 !default;
+// $table-hover-bg: $gray-100 !default;
+// $table-border-color: #111c2d0d !default;
+// $table-bg: $white !default;
+// $table-color: var(--bs-body-color) !default;
+// $table-cell-padding-y-sm: 12px !default;
+// $table-cell-padding-x-sm: 12px !default;
 
 $component-active-color:      $white !default;
 $component-active-bg:         $primary !default;
@@ -235,3 +235,7 @@ $link-color: #2a3547 !default;
 
 // Modal
 $modal-content-border-width: 0 !default;
+
+// scss-docs-start toast-variables
+$toast-border-width:                none !default;
+// scss-docs-end toast-variables

@@ -38,7 +38,7 @@
 
             <!-- Bottom Footer -->
             <div class="border-top mt-5 pt-4 d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-                <p class="text-muted small mb-0">&copy; 2026 NamaBrand. All rights reserved.</p>
+                <p class="text-muted small mb-0">&copy; {{ new Date().getFullYear() }} {{ $page.props.name }}. All rights reserved.</p>
                 <div class="d-flex gap-4">
                     <a href="#" class="text-decoration-none text-muted x-small">Privacy Policy</a>
                     <a href="#" class="text-decoration-none text-muted x-small">Terms of Service</a>

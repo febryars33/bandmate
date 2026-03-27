@@ -15,13 +15,13 @@ class DefaultRoleSeeder extends Seeder
     {
         $permissions = [
             // Customer
-            'browse_products',
-            'view_product',
-            'place_order',
-            'view_own_orders',
-            'cancel_own_order',
-            'update_own_profile',
-            'manage_own_addresses',
+            // 'browse_products',
+            // 'view_product',
+            // 'place_order',
+            // 'view_own_orders',
+            // 'cancel_own_order',
+            // 'update_own_profile',
+            // 'manage_own_addresses',
 
             // Admin / Staff
             'manage_users',
@@ -33,66 +33,66 @@ class DefaultRoleSeeder extends Seeder
             'view_reports',
 
             // Warehouse
-            'view_inventory',
-            'adjust_inventory',
-            'update_order_status',
-            'print_shipping_label',
-            'view_orders',
+            // 'view_inventory',
+            // 'adjust_inventory',
+            // 'update_order_status',
+            // 'print_shipping_label',
+            // 'view_orders',
 
             // Finance
-            'view_payments',
-            'confirm_payment',
-            'refund_payment',
-            'view_financial_reports',
-            'export_financial_data',
+            // 'view_payments',
+            // 'confirm_payment',
+            // 'refund_payment',
+            // 'view_financial_reports',
+            // 'export_financial_data',
 
             // Support
-            'update_order_notes',
-            'respond_customer_ticket',
-            'view_customer_profile',
-            'view_orders',
+            // 'update_order_notes',
+            // 'respond_customer_ticket',
+            // 'view_customer_profile',
+            // 'view_orders',
         ];
 
         foreach ($permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
 
-        Role::firstOrCreate(['name' => 'customer'])
-            ->givePermissionTo([
-                'browse_products',
-                'view_product',
-                'place_order',
-                'view_own_orders',
-                'cancel_own_order',
-                'update_own_profile',
-                'manage_own_addresses',
-            ]);
+        // Role::firstOrCreate(['name' => 'customer'])
+        //     ->givePermissionTo([
+        //         'browse_products',
+        //         'view_product',
+        //         'place_order',
+        //         'view_own_orders',
+        //         'cancel_own_order',
+        //         'update_own_profile',
+        //         'manage_own_addresses',
+        //     ]);
 
         Role::firstOrCreate(['name' => 'administrator'])
             ->givePermissionTo(Permission::all());
 
-        Role::firstOrCreate(['name' => 'warehouse'])
-            ->givePermissionTo([
-                'view_inventory',
-                'adjust_inventory',
-                'update_order_status',
-                'print_shipping_label',
-            ]);
+        // Role::firstOrCreate(['name' => 'warehouse'])
+        //     ->givePermissionTo([
+        //         'view_inventory',
+        //         'adjust_inventory',
+        //         'update_order_status',
+        //         'print_shipping_label',
+        //     ]);
 
-        Role::firstOrCreate(['name' => 'finance'])
-            ->givePermissionTo([
-                'view_payments',
-                'confirm_payment',
-                'refund_payment',
-                'view_financial_reports',
-                'export_financial_data',
-            ]);
+        // Role::firstOrCreate(['name' => 'finance'])
+        //     ->givePermissionTo([
+        //         'view_payments',
+        //         'confirm_payment',
+        //         'refund_payment',
+        //         'view_financial_reports',
+        //         'export_financial_data',
+        //     ]);
 
-        Role::firstOrCreate(['name' => 'support'])
-            ->givePermissionTo([
-                'update_order_notes',
-                'respond_customer_ticket',
-                'view_customer_profile',
-            ]);
+        // Role::firstOrCreate(['name' => 'support'])
+        //     ->givePermissionTo([
+        //         'update_order_notes',
+        //         'respond_customer_ticket',
+        //         'view_customer_profile',
+        //     ]);
     }
 }

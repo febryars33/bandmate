@@ -15,17 +15,18 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             DefaultRoleSeeder::class,
-            ArtistSeeder::class,
-            GenreSeeder::class,
+            // ArtistSeeder::class,
+            // GenreSeeder::class,
         ]);
-
-        // User::factory(10)->create();
 
         $admin = User::factory()->create([
-            'name' => 'Administrator',
-            'email' => 'test@example.com',
+            'name' => 'Febriansyah Riki Setiadi',
+            'username'  =>  'febryars33',
+            'email' => 'febry@bandmate.id',
         ]);
-
         $admin->assignRole('administrator');
+
+        sleep(1);
+        User::factory(24)->create();
     }
 }

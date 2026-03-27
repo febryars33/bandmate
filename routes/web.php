@@ -1,9 +1,15 @@
 <?php
 
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
+Route::get('/@{username}', ProfileController::class)
+    ->name('profile')
+    ->where('username', '[A-Za-z0-9_.]+');
 
 Route::get('/', HomeController::class)->name('home');
 
@@ -17,9 +23,7 @@ Route::get('/contact', function () {
 
 Route::resource('/artists', ArtistController::class);
 
-Route::get('/login', function () {
-    return Inertia::render('auth/Login');
-})
+Route::get('/login', LoginController::class)
     ->middleware(['guest'])
     ->name('login');
 

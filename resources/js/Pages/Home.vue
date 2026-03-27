@@ -1,10 +1,10 @@
 <template>
     <Head>
-        <title>{{ title }}</title>
-        <meta type="description" content="Platform kolaborasi musisi di seluruh Indonesia. Mulai karir musikmu bersama rekan yang tepat." />
+        <title>{{ meta.title }}</title>
+        <meta type="description" :content="meta.description" />
     </Head>
 
-    <section class="hero-section position-relative overflow-hidden py-5 py-lg-10">
+    <section class="hero-section position-relative overflow-hidden">
         <!-- Background Decor (Elemen ini bikin UI tidak flat) -->
         <div class="hero-blob hero-blob-1"></div>
         <div class="hero-blob hero-blob-2"></div>
@@ -33,9 +33,9 @@
                     </div>
 
                     <!-- Social Proof Sederhana (Opsional) -->
-                    <div class="mt-5 pt-4 border-top border-light d-none d-md-block">
+                    <!-- <div class="mt-5 pt-4 border-top border-light d-none d-md-block">
                         <p class="small text-muted text-uppercase fw-bold letter-spacing-1">Dipercaya oleh 500+ Band Lokal</p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -82,5 +82,11 @@ import type { Recruitment } from '@/types/models/recruitment'
 import { Head } from '@inertiajs/vue3'
 // import Quotes from '@/components/Quotes.vue';
 
-defineProps<{ title: string; paragraph: string; recruitments: Recruitment[] }>()
+defineProps<{
+    recruitments: Recruitment[]
+    meta: {
+        title: string
+        description: string
+    }
+}>()
 </script>

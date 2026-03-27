@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Sushi\Sushi;
 
 class Recruitment extends Model
 {
-    use Sushi;
+    use SoftDeletes, Sushi;
 
     protected array $rows = [];
 
@@ -21,6 +22,7 @@ class Recruitment extends Model
                 'title' => fake()->sentence(),
                 'description' => fake()->paragraph(),
                 'location' => 'Bandung',
+                'deleted_at' => null,
             ];
         }
     }

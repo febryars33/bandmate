@@ -1,0 +1,190 @@
+/* =============================================
+   NAVBAR — BandMate
+   Minimal custom CSS, max Bootstrap + CSS var
+   ============================================= */
+
+/* --- Scroll-aware backdrop blur --- */
+.navbar-main {
+    --nb-height: 64px;
+    height: var(--nb-height);
+    transition: background 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+    backdrop-filter: blur(0px);
+}
+
+.navbar-main.scrolled {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 1px 0 rgba(var(--bs-body-color-rgb), 0.08);
+    background: rgba(var(--bs-body-bg-rgb), 0.85) !important;
+}
+
+/* --- Brand logo pulse on hover --- */
+.navbar-brand img {
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+}
+.navbar-brand:hover img {
+    transform: scale(1.08);
+    opacity: 0.9;
+}
+
+/* --- Nav pill style links --- */
+.nav-pill {
+    border-radius: 8px;
+    padding: 6px 14px !important;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+    transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+    position: relative;
+}
+
+.nav-pill::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 16px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--bs-primary);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.nav-pill:hover::after,
+.nav-pill.active::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+.nav-pill:hover {
+    background: rgba(var(--bs-primary-rgb), 0.08);
+    transform: translateY(-1px);
+}
+
+.nav-pill.active {
+    color: var(--bs-primary) !important;
+    background: rgba(var(--bs-primary-rgb), 0.1);
+    font-weight: 600;
+}
+
+/* --- Animated dropdown --- */
+/* .dropdown-menu-animated {
+    animation: dropIn 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: top center;
+    border: 1px solid rgba(var(--bs-body-color-rgb), 0.08);
+    border-radius: 12px;
+    padding: 6px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.dropdown-menu-animated .dropdown-item {
+    border-radius: 8px;
+    font-size: 0.875rem;
+    transition: background 0.15s ease, transform 0.15s ease;
+} */
+/*
+.dropdown-menu-animated .dropdown-item:hover {
+    transform: translateX(4px);
+} */
+
+@keyframes dropIn {
+    from { opacity: 0; transform: translateY(-8px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
+/* --- Theme toggle button --- */
+.theme-btn {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(var(--bs-body-color-rgb), 0.06);
+    color: var(--bs-body-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.theme-btn:hover {
+    background: rgba(var(--bs-primary-rgb), 0.12);
+    transform: rotate(20deg) scale(1.1);
+}
+
+.theme-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* --- Auth buttons --- */
+.btn-ghost-primary {
+    border: 1.5px solid rgba(var(--bs-primary-rgb), 0.4);
+    color: var(--bs-primary);
+    background: transparent;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.btn-ghost-primary:hover {
+    background: rgba(var(--bs-primary-rgb), 0.08);
+    border-color: var(--bs-primary);
+    transform: translateY(-1px);
+}
+
+.btn-primary-gradient {
+    background: linear-gradient(135deg, var(--bs-primary), color-mix(in srgb, var(--bs-primary) 70%, var(--bs-info)));
+    border: none;
+    color: #fff;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 12px rgba(var(--bs-primary-rgb), 0.35);
+}
+
+.btn-primary-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(var(--bs-primary-rgb), 0.45);
+    color: #fff;
+}
+
+/* --- Offcanvas enhancements --- */
+.offcanvas {
+    border-left: 1px solid rgba(var(--bs-body-color-rgb), 0.08) !important;
+}
+
+.offcanvas-body .navbar-nav {
+    gap: 4px;
+}
+
+/* --- Toggler animation --- */
+.navbar-toggler {
+    border: 1.5px solid rgba(var(--bs-body-color-rgb), 0.2);
+    border-radius: 10px;
+    padding: 6px 10px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.navbar-toggler:hover {
+    background: rgba(var(--bs-primary-rgb), 0.08);
+    transform: scale(1.05);
+}
+
+/* --- Mobile: stack auth buttons --- */
+@media (max-width: 991.98px) {
+    .offcanvas-body .btn-ghost-primary,
+    .offcanvas-body .btn-primary-gradient {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+body {
+  padding-bottom: 20px;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}

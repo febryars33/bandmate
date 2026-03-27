@@ -18,6 +18,7 @@ use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
+        api: __DIR__.'/../routes/api.php',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
@@ -47,19 +48,19 @@ return Application::configure(basePath: dirname(__DIR__))
             //
         });
 
-        $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
-            if (! app()->environment(['local', 'testing']) && in_array($response->getStatusCode(), [Response::HTTP_INTERNAL_SERVER_ERROR, Response::HTTP_SERVICE_UNAVAILABLE, Response::HTTP_NOT_FOUND, Response::HTTP_FORBIDDEN])) {
-                return Inertia::render('ErrorPage', ['status' => $response->getStatusCode()])
-                    ->toResponse($request)
-                    ->setStatusCode($response->getStatusCode());
-            }
+        // $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
+        //     if (! app()->environment(['local', 'testing']) && in_array($response->getStatusCode(), [Response::HTTP_INTERNAL_SERVER_ERROR, Response::HTTP_SERVICE_UNAVAILABLE, Response::HTTP_NOT_FOUND, Response::HTTP_FORBIDDEN])) {
+        //         return Inertia::render('ErrorPage', ['status' => $response->getStatusCode()])
+        //             ->toResponse($request)
+        //             ->setStatusCode($response->getStatusCode());
+        //     }
 
-            if ($response->getStatusCode() === 419) {
-                return back()->with([
-                    'message' => 'The page expired, please try again.',
-                ]);
-            }
+        //     if ($response->getStatusCode() === 419) {
+        //         return back()->with([
+        //             'message' => 'The page expired, please try again.',
+        //         ]);
+        //     }
 
-            return $response;
-        });
+        //     return $response;
+        // });
     })->create();

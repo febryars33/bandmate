@@ -13,8 +13,10 @@ class HomeController extends Controller
     public function __invoke()
     {
         return Inertia::render('Home', [
-            'title' => fake()->sentence(),
-            'paragraph' => fake()->paragraph(),
+            'meta' => [
+                'title' => 'Platform Kolaborasi Musik',
+                'paragraph' => 'Platform kolaborasi musisi di seluruh Indonesia. Mulai karir musikmu bersama rekan yang tepat.',
+            ],
             'recruitments' => Recruitment::all(),
         ]);
     }
