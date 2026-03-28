@@ -4,6 +4,7 @@ use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecruitmentController;
@@ -26,6 +27,7 @@ Route::get('/contact', function () {
 
 Route::resource('/artists', ArtistController::class);
 Route::resource('/recruitments', RecruitmentController::class);
+Route::resource('/events', EventController::class);
 
 Route::middleware(['auth'])->group(function () {
     //
