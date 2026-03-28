@@ -10,18 +10,18 @@
             Kembali ke Daftar Lowongan
         </Link>
         <div class="row mt-3">
-            <div class="col-lg-8">
+            <div class="col-lg-8 mb-3 mb-lg-0">
                 <div class="card p-4 shadow-sm border-0 rounded-4">
                     <div class="d-flex flex-column flex-md-row justify-content-between align-items-start gap-3">
                         <div>
                             <div class="d-flex gap-2 mb-3">
-                                <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-3 small fw-bold">Drummer</span
-                                ><span class="badge bg-danger-subtle text-danger px-3 py-2 rounded-3 small fw-bold">Urgent</span>
+                                <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-3 small fw-bold"> Drummer </span>
+                                <span class="badge bg-danger-subtle text-danger px-3 py-2 rounded-3 small fw-bold"> Urgent </span>
                             </div>
                             <h1 class="fw-bold">{{ recruitment.title }}</h1>
                             <p class="text-primary fw-bold d-flex align-items-center fs-5">
                                 <i class="bi bi-person-bounding-box me-2" />
-                                The Rockers
+                                {{ recruitment.recruitmentable.name }}
                             </p>
                         </div>
                         <div class="text-md-end">
@@ -30,25 +30,31 @@
                         </div>
                     </div>
                     <div class="row g-3 mb-5 pb-4 border-bottom">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="p-3 bg-body-tertiary rounded-4 border-0 h-100">
                                 <p class="small mb-2">Lokasi</p>
                                 <p class="fw-bold mb-0 d-flex align-items-center">
                                     <i class="bi bi-geo-alt me-2 text-primary" />
-                                    Jakarta Selatan
+                                    {{ recruitment.regency_name }}
                                 </p>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div v-if="recruitment.recruitmentable_type === 'App\\Models\\Artist'" class="col-md-6">
                             <div class="p-3 bg-body-tertiary rounded-4 border-0 h-100">
                                 <p class="small mb-2">Genre</p>
                                 <p class="fw-bold mb-0 d-flex align-items-center">
                                     <i class="bi bi-music-note-beamed text-primary me-2" />
-                                    Hard Rock
+                                    <span
+                                        v-for="genre in recruitment.recruitmentable.few_genres"
+                                        class="badge bg-primary-subtle text-primary px-2 py-1 rounded-3 small border-primary"
+                                        style="font-size: 0.75rem"
+                                    >
+                                        {{ genre.name }}
+                                    </span>
                                 </p>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <!-- <div class="col-md-4">
                             <div class="p-3 bg-body-tertiary rounded-4 border-0 h-100">
                                 <p class="small mb-2">Skill Level</p>
                                 <p class="fw-bold mb-0 d-flex align-items-center">
@@ -56,7 +62,7 @@
                                     Menengah - Pro
                                 </p>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <h5 class="fw-bold mb-3 small text-uppercase">Deskripsi Lowongan</h5>
                     <p class="mb-5">

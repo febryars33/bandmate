@@ -10,7 +10,7 @@
                         </div>
                         <div>
                             <h6 class="fw-bold mb-1">{{ recruitment.title }}</h6>
-                            <p class="text-primary small mb-0">Level: Menengah - Pro · Jakarta</p>
+                            <p class="text-primary small mb-0">{{ recruitment.regency_name }}</p>
                         </div>
                     </div>
                     <Link :href="recruitmentsRoute.show(recruitment.slug)" class="btn btn-ghost-primary btn-sm shadow px-3 py-2" data-discover="true">

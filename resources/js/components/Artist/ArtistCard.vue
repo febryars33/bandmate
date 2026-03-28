@@ -6,13 +6,7 @@
                 <img :src="HERO_BG" :alt="artist.name" class="cover-img" loading="lazy" />
                 <!-- Location badge -->
                 <span v-if="artist.regency" class="loc-badge">
-                    <svg viewBox="0 0 16 16" fill="currentColor" width="11" height="11">
-                        <path
-                            fill-rule="evenodd"
-                            d="M8 1a5 5 0 00-5 5c0 2.542 2.088 4.946 3.813 6.477.38.337.994.337 1.374 0C9.912 10.946 13 8.542 13 6a5 5 0 00-5-5zm0 6.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"
-                            clip-rule="evenodd"
-                        />
-                    </svg>
+                    <i class="bi bi-geo-alt-fill" />
                     {{ artist.regency.name }}
                 </span>
                 <!-- Hover overlay -->
