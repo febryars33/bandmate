@@ -17,6 +17,8 @@ class ProfileController extends Controller
 
         $musician = $user->musicianable;
 
+        $musician->load(['instruments', 'genres']);
+
         return Inertia::render('Profile', [
             'musician'  =>  $musician,
             'user'      =>  $user->only('id', 'username'),

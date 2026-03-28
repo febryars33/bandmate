@@ -1,0 +1,74 @@
+/* =============================================
+   PROFILE — BandMate
+   Shared styles, variables, animations
+   ============================================= */
+
+/* --- Staggered entry animation --- */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.profile-animate {
+    animation: fadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.profile-animate:nth-child(1) { animation-delay: 0.05s; }
+.profile-animate:nth-child(2) { animation-delay: 0.12s; }
+.profile-animate:nth-child(3) { animation-delay: 0.19s; }
+.profile-animate:nth-child(4) { animation-delay: 0.26s; }
+.profile-animate:nth-child(5) { animation-delay: 0.33s; }
+
+/* --- Section card base --- */
+.profile-card {
+    border: 1px solid rgba(var(--bs-body-color-rgb), 0.07);
+    border-radius: 16px;
+    background: var(--bs-body-bg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    transition: box-shadow 0.25s ease;
+}
+
+.profile-card:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.07);
+}
+
+/* --- Section label --- */
+.section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bs-secondary-color);
+    margin-bottom: 1rem;
+}
+
+/* --- Pill badge --- */
+.skill-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.skill-pill:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.pill-instrument {
+    background: rgba(var(--bs-primary-rgb), 0.1);
+    color: var(--bs-primary);
+    border: 1px solid rgba(var(--bs-primary-rgb), 0.2);
+}
+
+.pill-genre {
+    background: rgba(var(--bs-secondary-rgb), 0.08);
+    color: var(--bs-body-color);
+    border: 1px solid rgba(var(--bs-body-color-rgb), 0.1);
+}

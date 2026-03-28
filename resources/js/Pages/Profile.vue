@@ -3,25 +3,29 @@
         <title>{{ musician.real_name }} (@{{ user.username }})</title>
     </Head>
 
-    <div class="container py-4">
-        <!-- Header -->
+    <div class="container py-4 py-lg-5 profile-page">
+        <!-- Hero header — full width -->
         <ProfileHeader :profile="profile" :musician="musician" :user="user" />
 
-        <!-- Stats -->
-        <ProfileStats :profile="profile" />
+        <!-- Two-column grid below header -->
+        <div class="profile-grid">
+            <!-- Left column: Stats + About + Skills -->
+            <aside class="profile-aside">
+                <ProfileStats :profile="profile" />
+                <ProfileSkills :instruments="musician.instruments" :genres="musician.genres" />
+            </aside>
 
-        <!-- About -->
-        <ProfileAbout :bio="profile.bio" />
-
-        <!-- Skills -->
-        <ProfileSkills :instruments="profile.instruments" :genres="profile.genres" />
-
-        <!-- Experience -->
-        <ProfileExperience :experiences="profile.experiences" />
+            <!-- Right column: Experience (wider) -->
+            <section class="profile-main">
+                <ProfileAbout :about="musician.about" />
+                <ProfileExperience :experiences="profile.experiences" />
+            </section>
+        </div>
     </div>
 </template>
 
 <script lang="ts" setup>
+import '@/components/Profile/profile.css'
 import ProfileAbout from '@/components/Profile/ProfileAbout.vue'
 import ProfileExperience from '@/components/Profile/ProfileExperience.vue'
 import ProfileHeader from '@/components/Profile/ProfileHeader.vue'
@@ -38,3 +42,19 @@ defineProps<{
     user: User
 }>()
 </script>
+
+<style scoped>
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+}
+
+@media (min-width: 768px) {
+    .profile-grid {
+        grid-template-columns: 320px 1fr;
+        gap: 0 1.25rem;
+        align-items: start;
+    }
+}
+</style>

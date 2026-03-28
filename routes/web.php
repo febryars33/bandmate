@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RecruitmentController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -22,11 +25,19 @@ Route::get('/contact', function () {
 });
 
 Route::resource('/artists', ArtistController::class);
-
-Route::get('/login', LoginController::class)
-    ->middleware(['guest'])
-    ->name('login');
+Route::resource('/recruitments', RecruitmentController::class);
 
 Route::middleware(['auth'])->group(function () {
     //
+});
+
+Route::middleware(['guest'])->group(function() {
+    Route::get('/login', LoginController::class)
+        ->name('login');
+
+    Route::get('/register', RegisterController::class)
+        ->name('register');
+
+    Route::get('/forgot-password', ForgotPasswordController::class)
+        ->name('forgot-password');
 });

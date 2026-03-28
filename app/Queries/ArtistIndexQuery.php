@@ -16,6 +16,7 @@ class ArtistIndexQuery
     {
         return Artist::query()
             ->with(['regency'])
+            ->withCount('discographies')
             ->when($this->request->search(), fn ($q, $s) => $this->applySearch($q, $s))
             ->unless($this->request->search(), fn ($q) => $q->latest())
             ->when($this->request->regencyIds(), fn ($q, $ids) => $q->whereIn('regency_id', $ids))

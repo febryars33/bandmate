@@ -35,9 +35,10 @@
 // Component style (Required file)
 
 @import "./component/reboot";
-@import "./component/card";
+// @import "./component/card";
 
 // Utilities style (Required file)
 @import "./utilities/icon-size";
+@import "./auth.scss";
 
 @import "./styles.scss";

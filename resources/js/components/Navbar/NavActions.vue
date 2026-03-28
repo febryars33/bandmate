@@ -9,7 +9,7 @@
         </template>
         <template v-else>
             <li class="nav-item">
-                <Link :href="login()" class="btn btn-ghost-primary fw-semibold px-4"> Masuk </Link>
+                <Link :href="login()" class="btn btn-ghost-primary rounded-3 fw-semibold px-4"> Masuk </Link>
             </li>
             <li class="nav-item">
                 <Link :href="register()" class="btn btn-primary-gradient fw-semibold px-4"> Daftar </Link>

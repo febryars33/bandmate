@@ -191,36 +191,6 @@ footer {
     }
 }
 
-.artist-card {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 20px;
-
-    .card-img-wrapper {
-        border-radius: 20px 20px 0 0;
-        aspect-ratio: 16 / 9; // Menjaga gambar tetap proporsional
-
-        img {
-            object-fit: cover;
-            height: 100%;
-            transition: transform 0.5s ease;
-        }
-    }
-
-    &:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
-
-        img {
-            transform: scale(1.1); // Efek zoom halus pada gambar
-        }
-
-        .btn-outline-primary {
-            background-color: var(--bs-primary);
-            color: white;
-        }
-    }
-}
-
 // Menghindari teks kepanjangan (maksimal 2 baris)
 .line-clamp-2 {
     display: -webkit-box;
@@ -231,4 +201,18 @@ footer {
 
 .blur-shadow {
     backdrop-filter: blur(4px);
+}
+
+@each $key, $value in $theme-colors {
+    .btn-ghost-#{$key} {
+        border-color: $value;
+        color: $value;
+        background: transparent;
+    }
+
+    .btn-ghost-#{$key}:hover {
+        background: rgba($value, 0.08);
+        border-color: $value;
+        transform: translateY(-1px);
+    }
 }

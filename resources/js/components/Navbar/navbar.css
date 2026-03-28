@@ -120,21 +120,6 @@
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* --- Auth buttons --- */
-.btn-ghost-primary {
-    border: 1.5px solid rgba(var(--bs-primary-rgb), 0.4);
-    color: var(--bs-primary);
-    background: transparent;
-    border-radius: 10px;
-    transition: all 0.2s ease;
-}
-
-.btn-ghost-primary:hover {
-    background: rgba(var(--bs-primary-rgb), 0.08);
-    border-color: var(--bs-primary);
-    transform: translateY(-1px);
-}
-
 .btn-primary-gradient {
     background: linear-gradient(135deg, var(--bs-primary), color-mix(in srgb, var(--bs-primary) 70%, var(--bs-info)));
     border: none;

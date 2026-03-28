@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Queries\ArtistIndexQuery;
 use App\Queries\GenreSearchQuery;
 use App\Queries\RegencySearchQuery;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -57,15 +59,38 @@ class ArtistController extends Controller
         //             'Bass'
         //         ]
         //     ]);
-        $artist = Artist::query()
-            ->where('slug', $slug)
-            ->with(['discographies', 'genres', 'current_lineups', 'past_members', 'complete_lineups'])
-            ->firstOrFail();
+        // $artist = Artist::query()
+        //     ->where('slug', $slug)
+        //     ->with(['discographies', 'genres', 'current_lineups', 'past_members', 'complete_lineups'])
+        //     ->firstOrFail();
+
+        $artist = Artist::where('slug', $slug)->firstOrFail();
+
+        $artist->loadMissing([
+            'recruitments',
+            'discographies',
+            'genres',
+            'current_lineups'   =>  function (HasMany $query) {
+                $query->with(['musician.user' => function($q) {
+                    $q->select(['id', 'username', 'musicianable_type', 'musicianable_id']);
+                }]);
+            },
+            'past_members'      =>  function (HasMany $query) {
+                $query->with(['musician.user' => function($q) {
+                    $q->select(['id', 'username', 'musicianable_type', 'musicianable_id']);
+                }]);
+            },
+            'complete_lineups'  =>  function (HasMany $query) {
+                $query->with(['musician.user' => function($q) {
+                    $q->select(['id', 'username', 'musicianable_type', 'musicianable_id']);
+                }]);
+            }
+        ]);
 
         return Inertia::render('Artists/Show', [
             'meta' => [
                 'title' => $artist->name,
-                'description' => Str::of(strip_tags($artist->about))->limit(156, '...'),
+                'description' => $artist->truncated_about,
             ],
             'slug' => $slug,
             'artist' => $artist

@@ -17,7 +17,7 @@ class HomeController extends Controller
                 'title' => 'Platform Kolaborasi Musik',
                 'paragraph' => 'Platform kolaborasi musisi di seluruh Indonesia. Mulai karir musikmu bersama rekan yang tepat.',
             ],
-            'recruitments' => Recruitment::all(),
+            'recruitments' => Recruitment::limit(8)->get(),
         ]);
     }
 }

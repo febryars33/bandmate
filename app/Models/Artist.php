@@ -10,12 +10,26 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 use Snairbef\Regional\Models\Regency;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Artist extends Model
 {
     /** @use HasFactory<ArtistFactory> */
-    use HasFactory;
+    use HasFactory, SoftDeletes, HasSlug;
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'truncated_about',
+    ];
 
     protected $with = [
         'spotify',
@@ -33,6 +47,16 @@ class Artist extends Model
     }
 
     /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
@@ -42,6 +66,20 @@ class Artist extends Model
         return [
             'is_verified' => 'boolean',
         ];
+    }
+
+    /**
+     * Get the truncated about
+     */
+    protected function truncatedAbout(): Attribute
+    {
+        return Attribute::make(function() {
+            return Str::limit(
+                strip_tags($this->about),
+                160,
+                '...'
+            );
+        });
     }
 
     /**
@@ -149,6 +187,16 @@ class Artist extends Model
      */
     public function few_genres(): BelongsToMany
     {
-        return $this->genres()->limit(5);
+        return $this->genres()->limit(3);
+    }
+
+    /**
+     * Get all of the recruitments for the Artist
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function recruitments(): MorphMany
+    {
+        return $this->morphMany(Recruitment::class, 'recruitmentable');
     }
 }

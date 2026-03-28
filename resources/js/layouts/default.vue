@@ -4,6 +4,7 @@
             <Navbar />
         </header>
 
+        <!-- min-vh-100 d-flex flex-column -->
         <main class="app-main flex-grow-1">
             <slot />
         </main>

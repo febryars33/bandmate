@@ -1,0 +1,57 @@
+/* =============================================
+   ARTIST SHOW PAGE — BandMate
+   Shared tokens, animations, base classes
+   ============================================= */
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.artist-animate {
+    animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.artist-animate:nth-child(1) { animation-delay: 0.05s; }
+.artist-animate:nth-child(2) { animation-delay: 0.13s; }
+.artist-animate:nth-child(3) { animation-delay: 0.21s; }
+.artist-animate:nth-child(4) { animation-delay: 0.29s; }
+
+/* --- Base section card --- */
+.artist-card {
+    border: 1px solid rgba(var(--bs-body-color-rgb), 0.07);
+    border-radius: 16px;
+    background: var(--bs-body-bg);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 20px rgba(0,0,0,0.05);
+    overflow: hidden;
+    transition: box-shadow 0.25s ease;
+}
+
+/* --- Section heading --- */
+.section-eyebrow {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--bs-secondary-color);
+    margin-bottom: 0.875rem;
+}
+
+/* --- Genre pill --- */
+.genre-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background: rgba(var(--bs-primary-rgb), 0.1);
+    color: var(--bs-primary);
+    border: 1px solid rgba(var(--bs-primary-rgb), 0.2);
+    transition: transform 0.15s ease;
+}
+.genre-pill:hover { transform: translateY(-1px); }

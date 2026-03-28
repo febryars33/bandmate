@@ -29,10 +29,13 @@ return new class extends Migration
             $table->string('name_normalized')->nullable()->index();
             $table->string('name_compact')->nullable()->index();
 
-            $table->text('about')->nullable();
+            $table->longText('about')->nullable();
 
+            $table->string('img_logo')->nullable();
+            $table->string('img_cover')->nullable();
             $table->boolean('is_verified')->default(false);
             $table->timestamp('spotify_synced_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
             // FULLTEXT INDEX

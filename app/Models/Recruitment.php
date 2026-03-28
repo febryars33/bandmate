@@ -2,28 +2,67 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Sushi\Sushi;
+use Illuminate\Support\Str;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Recruitment extends Model
 {
-    use SoftDeletes, Sushi;
+    use SoftDeletes, HasSlug;
 
-    protected array $rows = [];
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'truncated_description',
+    ];
 
-    public function __construct()
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions() : SlugOptions
     {
-        parent::__construct();
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
+    }
 
-        for ($i = 1; $i <= 8; $i++) {
-            $this->rows[] = [
-                'id' => $i,
-                'title' => fake()->sentence(),
-                'description' => fake()->paragraph(),
-                'location' => 'Bandung',
-                'deleted_at' => null,
-            ];
-        }
+    /**
+     * Get the truncated description
+     */
+    protected function truncatedDescription(): Attribute
+    {
+        return Attribute::make(function() {
+            return Str::limit(
+                strip_tags($this->description),
+                160,
+                '...'
+            );
+        });
+    }
+
+    /**
+     * Get the user that owns the Recruitment
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the recruitmentable that owns the Recruitment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function recruitmentable(): MorphTo
+    {
+        return $this->morphTo();
     }
 }

@@ -24,7 +24,8 @@
         "laravolt/avatar": "^6.3",
         "log1x/laravel-webfonts": "^2.0",
         "snairbef/regional": "*",
-        "spatie/laravel-permission": "^6.24"
+        "spatie/laravel-permission": "^6.24",
+        "spatie/laravel-sluggable": "^3.8"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
