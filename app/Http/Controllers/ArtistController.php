@@ -8,10 +8,8 @@ use App\Models\User;
 use App\Queries\ArtistIndexQuery;
 use App\Queries\GenreSearchQuery;
 use App\Queries\RegencySearchQuery;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -70,21 +68,21 @@ class ArtistController extends Controller
             'recruitments',
             'discographies',
             'genres',
-            'current_lineups'   =>  function (HasMany $query) {
-                $query->with(['musician.user' => function($q) {
+            'current_lineups' => function (HasMany $query) {
+                $query->with(['musician.user' => function ($q) {
                     $q->select(['id', 'username', 'musicianable_type', 'musicianable_id']);
                 }]);
             },
-            'past_members'      =>  function (HasMany $query) {
-                $query->with(['musician.user' => function($q) {
+            'past_members' => function (HasMany $query) {
+                $query->with(['musician.user' => function ($q) {
                     $q->select(['id', 'username', 'musicianable_type', 'musicianable_id']);
                 }]);
             },
-            'complete_lineups'  =>  function (HasMany $query) {
-                $query->with(['musician.user' => function($q) {
+            'complete_lineups' => function (HasMany $query) {
+                $query->with(['musician.user' => function ($q) {
                     $q->select(['id', 'username', 'musicianable_type', 'musicianable_id']);
                 }]);
-            }
+            },
         ]);
 
         return Inertia::render('Artists/Show', [
@@ -93,7 +91,7 @@ class ArtistController extends Controller
                 'description' => $artist->truncated_about,
             ],
             'slug' => $slug,
-            'artist' => $artist
+            'artist' => $artist,
         ]);
     }
 

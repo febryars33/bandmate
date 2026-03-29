@@ -20,7 +20,7 @@ use Spatie\Sluggable\SlugOptions;
 class Artist extends Model
 {
     /** @use HasFactory<ArtistFactory> */
-    use HasFactory, SoftDeletes, HasSlug;
+    use HasFactory, HasSlug, SoftDeletes;
 
     /**
      * The accessors to append to the model's array form.
@@ -49,7 +49,7 @@ class Artist extends Model
     /**
      * Get the options for generating the slug.
      */
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')
@@ -73,7 +73,7 @@ class Artist extends Model
      */
     protected function truncatedAbout(): Attribute
     {
-        return Attribute::make(function() {
+        return Attribute::make(function () {
             return Str::limit(
                 strip_tags($this->about),
                 160,
@@ -108,8 +108,6 @@ class Artist extends Model
 
     /**
      * Get all of the discographies for the Artist
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function discographies(): HasMany
     {
@@ -118,8 +116,6 @@ class Artist extends Model
 
     /**
      * Get all of the complete_lineups for the Artist
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function complete_lineups(): HasMany
     {
@@ -130,8 +126,6 @@ class Artist extends Model
 
     /**
      * Get all of the current_lineups for the Artist
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function current_lineups(): HasMany
     {
@@ -143,8 +137,6 @@ class Artist extends Model
 
     /**
      * Get all of the past_members for the Artist
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function past_members(): HasMany
     {
@@ -156,8 +148,6 @@ class Artist extends Model
 
     /**
      * The current_lineups that belong to the Artist
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     // public function current_lineups(): BelongsToMany
     // {
@@ -170,8 +160,6 @@ class Artist extends Model
 
     /**
      * The past_members that belong to the Artist
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     // public function past_members(): BelongsToMany
     // {
@@ -192,8 +180,6 @@ class Artist extends Model
 
     /**
      * Get all of the recruitments for the Artist
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function recruitments(): MorphMany
     {

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class ProfileController extends Controller
@@ -20,8 +22,9 @@ class ProfileController extends Controller
         $musician->load(['instruments', 'genres']);
 
         return Inertia::render('Profile', [
-            'musician'  =>  $musician,
-            'user'      =>  $user->only('id', 'username'),
+            'musician' => $musician,
+            'user' => $user->only('id', 'username'),
+            'username'  =>  $username,
             'profile' => [
                 'id' => 1,
                 'username' => $username,
@@ -71,6 +74,24 @@ class ProfileController extends Controller
                     ],
                 ],
             ],
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+        $user = Auth::user();
+
+        if ($request->boolean('_patch')) {
+            $user->musicianable()->update($request->array('fields'));
+            // $user->musicianable()->update($request->all('fields'));
+        }
+
+        // $user->musicianable()->update([
+        //     'about' =>  $request->input('about'),
+        // ]);
+
+        return Redirect::back()->with([
+            'data' => 'Something you want to pass to front-end',
         ]);
     }
 }

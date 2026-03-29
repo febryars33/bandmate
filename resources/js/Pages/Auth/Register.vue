@@ -40,6 +40,27 @@
             </span>
         </div>
 
+        <!-- Username -->
+        <div class="field" :class="{ 'field--error': form.errors.username }">
+            <label for="username" class="field-label">Username</label>
+            <div class="field-input-wrap">
+                <i class="bi bi-envelope field-icon" />
+                <input
+                    id="username"
+                    v-model="form.username"
+                    type="username"
+                    class="field-input"
+                    placeholder="john"
+                    autocomplete="username"
+                    :aria-invalid="!!form.errors.username"
+                    :aria-describedby="form.errors.username ? 'username-err' : undefined"
+                />
+            </div>
+            <span v-if="form.errors.username" id="username-err" class="field-error" role="alert">
+                {{ form.errors.username }}
+            </span>
+        </div>
+
         <!-- Email -->
         <div class="field" :class="{ 'field--error': form.errors.email }">
             <label for="email" class="field-label">Email</label>
@@ -147,6 +168,7 @@ defineProps<{
 }>()
 
 const form = useForm({
+    username: '',
     name: '',
     email: '',
     password: '',
@@ -167,16 +189,16 @@ const submit = () => {
                 variant: 'success',
             })
         },
-        onError: (errors) => {
-            const isValidation = ['name', 'email', 'password', 'password_confirmation'].some((k) => k in errors)
-            if (!isValidation) {
-                show({
-                    title: 'Terjadi kesalahan',
-                    message: 'Silakan coba beberapa saat lagi.',
-                    variant: 'danger',
-                })
-            }
-        },
+        // onError: (errors) => {
+        //     const isValidation = ['name', 'email', 'password', 'password_confirmation'].some((k) => k in errors)
+        //     if (!isValidation) {
+        //         show({
+        //             title: 'Terjadi kesalahan',
+        //             message: 'Silakan coba beberapa saat lagi.',
+        //             variant: 'danger',
+        //         })
+        //     }
+        // },
     })
 }
 </script>

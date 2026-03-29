@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Musician;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,18 +16,26 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             DefaultRoleSeeder::class,
-            // ArtistSeeder::class,
-            // GenreSeeder::class,
+            ArtistSeeder::class,
+            GenreSeeder::class,
+        ]);
+
+        $musician = Musician::create([
+            'stage_name' => null,
+            'real_name' => 'Febri',
         ]);
 
         $admin = User::factory()->create([
-            'name' => 'Febriansyah Riki Setiadi',
-            'username'  =>  'febryars33',
+            'name' => 'Febri',
+            'username' => 'febry',
             'email' => 'febry@bandmate.id',
+            'musicianable_type' => Musician::class,
+            'musicianable_id' => $musician->id,
         ]);
+
         $admin->assignRole('administrator');
 
         sleep(1);
-        User::factory(24)->create();
+        // User::factory(24)->create();
     }
 }

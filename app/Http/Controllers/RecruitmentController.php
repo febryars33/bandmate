@@ -53,12 +53,12 @@ class RecruitmentController extends Controller
         $recruitment = Recruitment::where('slug', $slug)->firstOrFail();
 
         $recruitment->loadMissing([
-            'recruitmentable'
+            'recruitmentable',
         ]);
 
         return Inertia::render('Recruitments/Show', [
             'meta' => [
-                'title' => 'Lowongan - ' . $recruitment->title,
+                'title' => 'Lowongan - '.$recruitment->title,
                 'description' => $recruitment->truncated_description,
             ],
             'recruitment' => $recruitment,

@@ -14,10 +14,10 @@ class ForgotPasswordController extends Controller
     public function __invoke()
     {
         return Inertia::render('Auth/ForgotPassword', [
-            'meta'  =>  [
-                'title' =>  'Lupa Password',
-                'description'   =>  ''
-            ]
+            'meta' => [
+                'title' => 'Lupa Password',
+                'description' => '',
+            ],
         ]);
     }
 }

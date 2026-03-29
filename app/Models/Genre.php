@@ -12,12 +12,12 @@ use Spatie\Sluggable\SlugOptions;
 class Genre extends Model
 {
     /** @use HasFactory<GenreFactory> */
-    use HasFactory, SoftDeletes, HasSlug;
+    use HasFactory, HasSlug, SoftDeletes;
 
     /**
      * Get the options for generating the slug.
      */
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')

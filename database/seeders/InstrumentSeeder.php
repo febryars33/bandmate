@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Instrument;
 use Illuminate\Database\Seeder;
 
 class InstrumentSeeder extends Seeder
@@ -15,84 +15,84 @@ class InstrumentSeeder extends Seeder
         $instruments = [
             [
                 'name' => 'Gitar',
-                'name_english' => 'Guitar'
+                'name_english' => 'Guitar',
             ],
             [
                 'name' => 'Drums',
-                'name_english' => 'Drums'
+                'name_english' => 'Drums',
             ],
             [
                 'name' => 'Piano',
-                'name_english' => 'Piano'
+                'name_english' => 'Piano',
             ],
             [
                 'name' => 'Bass',
-                'name_english' => 'Bass Guitar'
+                'name_english' => 'Bass Guitar',
             ],
             [
                 'name' => 'Violin',
-                'name_english' => 'Violin'
+                'name_english' => 'Violin',
             ],
             [
                 'name' => 'Saxophone',
-                'name_english' => 'Saxophone'
+                'name_english' => 'Saxophone',
             ],
             [
                 'name' => 'Cello',
-                'name_english' => 'Cello'
+                'name_english' => 'Cello',
             ],
             [
                 'name' => 'Biola',
-                'name_english' => 'Violin'
+                'name_english' => 'Violin',
             ],
             [
                 'name' => 'Kontrabas',
-                'name_english' => 'Double Bass'
+                'name_english' => 'Double Bass',
             ],
             [
                 'name' => 'Harpa',
-                'name_english' => 'Harp'
+                'name_english' => 'Harp',
             ],
             [
                 'name' => 'Klarnet',
-                'name_english' => 'Clarinet'
+                'name_english' => 'Clarinet',
             ],
             [
                 'name' => 'Flauta',
-                'name_english' => 'Flute'
+                'name_english' => 'Flute',
             ],
             [
                 'name' => 'Oboa',
-                'name_english' => 'Oboe'
+                'name_english' => 'Oboe',
             ],
             [
                 'name' => 'Klarinet',
-                'name_english' => 'Clarinet'
+                'name_english' => 'Clarinet',
             ],
             [
                 'name' => 'Fagot',
-                'name_english' => 'Bassoon'
+                'name_english' => 'Bassoon',
             ],
             [
                 'name' => 'Horn',
-                'name_english' => 'French Horn'
+                'name_english' => 'French Horn',
             ],
             [
                 'name' => 'Trombon',
-                'name_english' => 'Trombone'
+                'name_english' => 'Trombone',
             ],
             [
                 'name' => 'Tuba',
-                'name_english' => 'Tuba'
+                'name_english' => 'Tuba',
             ],
             [
                 'name' => 'Saksofon',
-                'name_english' => 'Saxophone'
+                'name_english' => 'Saxophone',
             ],
         ];
 
         foreach ($instruments as $instrument) {
-            \App\Models\Instrument::create($instrument);
+            Instrument::create($instrument);
         }
     }
 }

@@ -15,16 +15,14 @@ class ArtistMusician extends Pivot
     protected function casts(): array
     {
         return [
-            'joined_at'     => 'datetime',
-            'left_at'       => 'datetime',
-            'instruments'   => 'array',
+            'joined_at' => 'datetime',
+            'left_at' => 'datetime',
+            'instruments' => 'array',
         ];
     }
 
     /**
      * Get the artist that owns the ArtistMusician
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function artist(): BelongsTo
     {
@@ -33,8 +31,6 @@ class ArtistMusician extends Pivot
 
     /**
      * Get the musician that owns the ArtistMusician
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function musician(): BelongsTo
     {

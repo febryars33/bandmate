@@ -1,16 +1,18 @@
 <template>
-    <div class="app-layout">
-        <header>
-            <Navbar />
-        </header>
+    <BApp>
+        <div class="app-layout">
+            <header>
+                <Navbar />
+            </header>
 
-        <!-- min-vh-100 d-flex flex-column -->
-        <main class="app-main flex-grow-1">
-            <slot />
-        </main>
+            <!-- min-vh-100 d-flex flex-column -->
+            <main class="app-main flex-grow-1">
+                <slot />
+            </main>
 
-        <Footer />
-    </div>
+            <Footer />
+        </div>
+    </BApp>
 </template>
 
 <script lang="ts" setup>

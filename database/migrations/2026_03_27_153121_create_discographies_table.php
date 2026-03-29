@@ -20,6 +20,7 @@ return new class extends Migration
             $table->json('labels')->nullable();
             $table->string('slug')->unique();
             $table->string('cover')->nullable();
+            $table->integer('total_songs')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

@@ -2,10 +2,12 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\Musician;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Intervention\Validation\Rules\Username;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 
 class CreateNewUser implements CreatesNewUsers
@@ -20,7 +22,16 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input): User
     {
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
+            'username' => [
+                'required',
+                'string',
+                Rule::unique(User::class),
+            ],
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+            ],
             'email' => [
                 'required',
                 'string',
@@ -31,10 +42,17 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
+        $musician = Musician::create([
+            'real_name' => $input['name'],
+        ]);
+
         return User::create([
             'name' => $input['name'],
+            'username'  =>  strtolower($input['username']),
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'musicianable_type' => Musician::class,
+            'musicianable_id' => $musician->id,
         ]);
     }
 }

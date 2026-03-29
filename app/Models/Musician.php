@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Stevebauman\Purify\Casts\PurifyHtmlOnGet;
 
 class Musician extends Model
 {
@@ -29,9 +29,21 @@ class Musician extends Model
     ];
 
     /**
-     * Get the user associated with the Musician
+     * Get the attributes that should be cast.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'bio' => PurifyHtmlOnGet::class,
+            'about' => PurifyHtmlOnGet::class,
+            'social_links' => 'json',
+        ];
+    }
+
+    /**
+     * Get the user associated with the Musician
      */
     public function user(): MorphOne
     {

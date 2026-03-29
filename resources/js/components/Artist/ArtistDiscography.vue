@@ -1,6 +1,9 @@
 <template>
     <div class="artist-card artist-animate disco-card">
-        <p class="section-eyebrow">Diskografi</p>
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <p class="section-eyebrow m-0">Diskografi</p>
+            <button type="button" class="btn btn-link text-decoration-none">Semua</button>
+        </div>
 
         <div class="disco-grid">
             <a v-for="d in discographies" :key="d.id" role="button" class="disco-item">

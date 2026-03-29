@@ -5,7 +5,7 @@
 
     <div class="container py-4 py-lg-5 profile-page">
         <!-- Hero header — full width -->
-        <ProfileHeader :profile="profile" :musician="musician" :user="user" />
+        <ProfileHeader :profile="profile" :musician="musician" :user="user" :username="user.username" />
 
         <!-- Two-column grid below header -->
         <div class="profile-grid">
@@ -17,7 +17,7 @@
 
             <!-- Right column: Experience (wider) -->
             <section class="profile-main">
-                <ProfileAbout :about="musician.about" />
+                <ProfileAbout :about="musician.about" :musician="musician" :username="user.username" />
                 <ProfileExperience :experiences="profile.experiences" />
             </section>
         </div>

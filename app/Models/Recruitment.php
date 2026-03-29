@@ -13,7 +13,7 @@ use Spatie\Sluggable\SlugOptions;
 
 class Recruitment extends Model
 {
-    use SoftDeletes, HasSlug;
+    use HasSlug, SoftDeletes;
 
     /**
      * The accessors to append to the model's array form.
@@ -27,7 +27,7 @@ class Recruitment extends Model
     /**
      * Get the options for generating the slug.
      */
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')
@@ -39,7 +39,7 @@ class Recruitment extends Model
      */
     protected function truncatedDescription(): Attribute
     {
-        return Attribute::make(function() {
+        return Attribute::make(function () {
             return Str::limit(
                 strip_tags($this->description),
                 160,
@@ -58,8 +58,6 @@ class Recruitment extends Model
 
     /**
      * Get the recruitmentable that owns the Recruitment
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function recruitmentable(): MorphTo
     {

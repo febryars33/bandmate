@@ -8,10 +8,14 @@
                         <h3 class="mb-0 mt-1">{{ recruitment.title }}</h3>
                         <div class="row mb-2">
                             <div class="col-lg-4">
-                                <h6>saymenothing</h6>
+                                <h6 v-if="recruitment.recruitmentable_type === 'App\\Models\\Artist'">
+                                    {{ recruitment.recruitmentable.name }}
+                                </h6>
                             </div>
                             <div class="col-lg-4">
-                                <h6>Bandung, Jawa Barat</h6>
+                                <h6>
+                                    {{ recruitment.regency_name }}
+                                </h6>
                             </div>
                         </div>
                         <p class="m-0 text-muted">
@@ -21,7 +25,6 @@
                     <div class="col-lg-4">
                         <div class="d-grid">
                             <Link :href="show(recruitment.slug)" type="button" class="btn btn-primary mb-2">See Detail</Link>
-                            <button type="button" class="btn btn-outline-primary">Apply Now</button>
                         </div>
                     </div>
                 </div>

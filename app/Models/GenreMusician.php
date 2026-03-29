@@ -15,7 +15,7 @@ class GenreMusician extends Pivot
         'musician_id',
         'genre_id',
         'description',
-        'genre_details'
+        'genre_details',
     ];
 
     /**
@@ -26,7 +26,7 @@ class GenreMusician extends Pivot
     protected function casts(): array
     {
         return [
-            'genre_details' => 'array'
+            'genre_details' => 'array',
         ];
     }
 }

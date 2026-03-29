@@ -15,7 +15,7 @@ class InstrumentMusician extends Pivot
         'musician_id',
         'instrument_id',
         'description',
-        'instrument_details'
+        'instrument_details',
     ];
 
     /**
@@ -26,7 +26,7 @@ class InstrumentMusician extends Pivot
     protected function casts(): array
     {
         return [
-            'instrument_details' => 'array'
+            'instrument_details' => 'array',
         ];
     }
 }

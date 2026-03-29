@@ -13,6 +13,6 @@ class Instrument extends Model
      */
     protected $fillable = [
         'name',
-        'name_english'
+        'name_english',
     ];
 }

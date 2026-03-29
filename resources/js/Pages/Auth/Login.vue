@@ -19,24 +19,24 @@
     <!-- Form -->
     <form class="auth-form" @submit.prevent="submit" novalidate>
         <!-- Email -->
-        <div class="field" :class="{ 'field--error': form.errors.email }">
-            <label for="email" class="field-label">Email</label>
+        <div class="field" :class="{ 'field--error': form.errors.username }">
+            <label for="username" class="field-label">Email / Username</label>
             <div class="field-input-wrap">
                 <i class="bi bi-envelope field-icon" />
                 <input
-                    id="email"
-                    v-model="form.email"
-                    type="email"
+                    id="text"
+                    v-model="form.username"
+                    type="username"
                     class="field-input"
                     placeholder="nama@email.com"
-                    autocomplete="email"
+                    autocomplete="username"
                     autofocus
-                    :aria-invalid="!!form.errors.email"
-                    :aria-describedby="form.errors.email ? 'email-err' : undefined"
+                    :aria-invalid="!!form.errors.username"
+                    :aria-describedby="form.errors.username ? 'username-err' : undefined"
                 />
             </div>
-            <span v-if="form.errors.email" id="email-err" class="field-error" role="alert">
-                {{ form.errors.email }}
+            <span v-if="form.errors.username" id="username-err" class="field-error" role="alert">
+                {{ form.errors.username }}
             </span>
         </div>
 
@@ -135,7 +135,7 @@ defineProps<{
 }>()
 
 const form = useForm({
-    email: '',
+    username: '',
     password: '',
     remember: false,
 })
