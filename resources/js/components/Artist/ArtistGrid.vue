@@ -3,7 +3,7 @@
     <template v-if="artists.data.length">
         <InfiniteScroll data="artists" :key="filterKey">
             <div class="row g-4">
-                <div v-for="(artist, i) in artists.data" :key="artist.id" class="col-lg-6 artist-col" :style="{ animationDelay: `${i * 0.055}s` }">
+                <div v-for="artist in artists.data" :key="artist.id" class="col-lg-6 artist-col">
                     <ArtistCard :artist="artist" />
                 </div>
             </div>

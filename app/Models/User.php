@@ -33,7 +33,7 @@ class User extends Authenticatable
         'email',
         'password',
         'musicianable_type',
-        'musicianable_id'
+        'musicianable_id',
     ];
 
     /**

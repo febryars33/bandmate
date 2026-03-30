@@ -28,53 +28,64 @@
                 </div>
 
                 <!-- Bio — inline editable hanya untuk pemilik profil -->
-                <p
-                    v-if="!bioEditActive"
-                    class="header-bio mb-2"
-                    :class="{ 'text-muted fst-italic': !musician.bio && isOwner }"
-                    @click="isOwner && activateBioEdit()"
-                    :role="isOwner ? 'button' : undefined"
-                    :title="isOwner ? 'Klik untuk mengedit bio' : undefined"
-                >
-                    <template v-if="musician.bio">
-                        <SafeHtml :content="musician.bio" />
-                    </template>
-                    <template v-else-if="isOwner">Belum ada bio. Klik untuk menambahkan.</template>
-                </p>
+                <template v-if="useAuth().check()">
+                    <p
+                        v-if="!bioEditActive"
+                        class="header-bio mb-2"
+                        :class="{ 'text-muted fst-italic': !musician.bio && isOwner }"
+                        @click="isOwner && activateBioEdit()"
+                        :role="isOwner ? 'button' : undefined"
+                        :title="isOwner ? 'Klik untuk mengedit bio' : undefined"
+                    >
+                        <template v-if="musician.bio">
+                            <SafeHtml :content="musician.bio" />
+                        </template>
+                        <template v-else-if="isOwner">Belum ada bio. Klik untuk menambahkan.</template>
+                    </p>
 
-                <!-- Input bio — auto-focus saat aktif, hilang saat blur / Enter / Esc -->
-                <div v-else class="col-lg-6">
-                    <input
-                        ref="bioInputRef"
-                        v-model="bioValue"
-                        type="text"
-                        class="form-control form-control-sm mb-2 col-lg-6"
-                        placeholder="Tulis bio singkat..."
-                        maxlength="160"
-                        @blur="deactivateBioEdit"
-                        @keydown.enter="deactivateBioEdit"
-                        @keydown.esc="cancelBioEdit"
-                    />
-                </div>
+                    <!-- Input bio — auto-focus saat aktif, hilang saat blur / Enter / Esc -->
+                    <div v-else class="col-lg-6">
+                        <input
+                            ref="bioInputRef"
+                            v-model="bioValue"
+                            type="text"
+                            class="form-control form-control-sm mb-2 col-lg-6"
+                            placeholder="Tulis bio singkat..."
+                            maxlength="160"
+                            @blur="deactivateBioEdit"
+                            @keydown.enter="deactivateBioEdit"
+                            @keydown.esc="cancelBioEdit"
+                        />
+                    </div>
+                </template>
 
                 <!-- Meta -->
                 <div class="d-flex flex-wrap gap-3">
                     <span class="d-inline-flex align-items-center gap-1" style="font-size: 0.8rem">
-                        <i class="bi bi-geo-alt-fill" />
+                        <i class="bi bi-geo-alt-fill text-danger" />
                         Bandung, Jawa Barat
+                    </span>
+                    <span class="text-muted" v-if="musician.created_at">
+                        Bergabung sejak
+                        {{
+                            new Intl.DateTimeFormat('en-US', { year: 'numeric' }).format(
+                                musician.created_at ? new Date(musician.created_at) : new Date(),
+                            )
+                        }}
                     </span>
                 </div>
             </div>
 
             <!-- CTA — hanya tampil untuk non-owner -->
-            <div class="header-cta pb-1" v-if="!isOwner">
+            <!-- <div class="header-cta pb-1" v-if="!isOwner">
                 <button class="btn btn-primary btn-follow w-100">Ikuti</button>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
+import { useAuth } from '@/composables/useAuth'
 import { update } from '@/routes/profile'
 import type { Musician } from '@/types/models/musician'
 import type { User } from '@/types/models/user'

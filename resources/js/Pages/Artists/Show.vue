@@ -27,7 +27,7 @@
 
                 <ArtistRecruitment v-if="artist.recruitments.length" :recruitments="artist.recruitments" class="mb-4" />
 
-                <ArtistDiscography v-if="artist.discographies.length" :discographies="artist.discographies" :base-url="$page.props.baseUrl" />
+                <ArtistDiscography v-if="artist.discographies.length" :discographies="artist.discographies" :base-url="pageProps.baseUrl" />
             </div>
         </div>
     </div>
@@ -42,7 +42,7 @@ import ArtistMembers from '@/components/Artist/ArtistMembers.vue'
 import ArtistRecruitment from '@/components/Artist/ArtistRecruitment.vue'
 import ArtistSidebar from '@/components/Artist/ArtistSidebar.vue'
 import type { Artist } from '@/types/models/artist'
-import { Head } from '@inertiajs/vue3'
+import { Head, usePage } from '@inertiajs/vue3'
 import { computed } from 'vue'
 
 // ─── Props ───────────────────────────────────────────────────────────────────
@@ -51,6 +51,9 @@ const props = defineProps<{
     artist: Artist
     meta: { title: string; description: string }
 }>()
+
+const page = usePage()
+const pageProps = computed(() => page.props)
 
 // ─── Static assets (swap with dynamic data when API provides them) ───────────
 let HERO_BG = 'https://placehold.co/820x360/1a1a2e/ffffff?font=raleway&text=' + props.artist.name

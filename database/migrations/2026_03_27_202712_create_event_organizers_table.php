@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('event_organizers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->longText('about')->nullable();
+
+            $table->fullText(['name', 'about']);
             $table->timestamps();
         });
     }

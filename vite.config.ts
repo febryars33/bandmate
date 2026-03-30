@@ -6,9 +6,6 @@ import components from 'unplugin-vue-components/vite'
 import {BootstrapVueNextResolver} from 'bootstrap-vue-next/resolvers'
 
 export default defineConfig({
-    build: {
-        cssCodeSplit: true,
-    },
     plugins: [
         laravel({
             input: ['resources/js/app.ts', 'resources/scss/app.scss'],

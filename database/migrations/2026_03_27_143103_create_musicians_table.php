@@ -7,6 +7,7 @@ use App\Models\Musician;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Snairbef\Regional\Models\Regency;
 
 return new class extends Migration
 {
@@ -17,6 +18,8 @@ return new class extends Migration
     {
         Schema::create('musicians', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Regency::class)->nullable();
+            $table->string('regency_name')->nullable();
             $table->string('stage_name')->nullable();
             $table->string('real_name')->nullable();
             $table->longText('bio')->nullable();
@@ -24,6 +27,8 @@ return new class extends Migration
             $table->json('social_links')->nullable();
             $table->enum('gender', Gender::cases())->nullable();
             $table->string('birth_place')->nullable();
+
+            $table->softDeletes();
             $table->timestamps();
         });
 

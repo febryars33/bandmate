@@ -18,4 +18,6 @@ export type Musician<T = ArtistMusician> = {
     few_genre?: Genre[]
     user?: User | null
     pivot?: T
+    created_at: string | null
+    updated_at: string | null
 };

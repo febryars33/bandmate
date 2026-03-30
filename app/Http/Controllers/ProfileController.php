@@ -24,7 +24,7 @@ class ProfileController extends Controller
         return Inertia::render('Profile', [
             'musician' => $musician,
             'user' => $user->only('id', 'username'),
-            'username'  =>  $username,
+            'username' => $username,
             'profile' => [
                 'id' => 1,
                 'username' => $username,

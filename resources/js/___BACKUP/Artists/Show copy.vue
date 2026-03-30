@@ -182,7 +182,7 @@
                                             <div class="row align-items-center">
                                                 <div class="col-4 col-lg-3">
                                                     <img
-                                                        :src="$page.props.baseUrl + '/storage' + discography.cover"
+                                                        :src="pageProps.baseUrl + '/storage' + discography.cover"
                                                         :alt="discography.title"
                                                         class="img-fluid rounded"
                                                     />
@@ -221,7 +221,8 @@
 import Musician from '@/components/Artist/Musician.vue'
 import artists from '@/routes/artists'
 import type { Artist } from '@/types/models/artist'
-import { Head, Link } from '@inertiajs/vue3'
+import { Head, Link, usePage } from '@inertiajs/vue3'
+import { computed } from 'vue'
 
 defineProps<{
     slug: string
@@ -231,6 +232,9 @@ defineProps<{
         description: string
     }
 }>()
+
+const page = usePage()
+const pageProps = computed(() => page.props)
 </script>
 
 <style>

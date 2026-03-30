@@ -38,7 +38,7 @@
 
             <!-- Bottom Footer -->
             <div class="border-top mt-5 pt-4 d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-                <p class="text-muted small mb-0">&copy; {{ new Date().getFullYear() }} {{ $page.props.name }}. All rights reserved.</p>
+                <p class="text-muted small mb-0">&copy; {{ new Date().getFullYear() }} {{ pageProps.name }}. All rights reserved.</p>
                 <div class="d-flex gap-4">
                     <a href="#" class="text-decoration-none text-muted x-small">Privacy Policy</a>
                     <a href="#" class="text-decoration-none text-muted x-small">Terms of Service</a>
@@ -50,5 +50,9 @@
 
 <script setup lang="ts">
 import { index } from '@/routes/artists'
-import { Link } from '@inertiajs/vue3'
+import { Link, usePage } from '@inertiajs/vue3'
+import { computed } from 'vue'
+
+const page = usePage()
+const pageProps = computed(() => page.props)
 </script>

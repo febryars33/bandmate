@@ -61,7 +61,7 @@
                             </button>
                         </li>
 
-                        <template v-if="$page.props.auth.user">
+                        <template v-if="user">
                             <UserDropdown />
                         </template>
                         <template v-else>
@@ -95,9 +95,12 @@
 import { home, login } from '@/routes'
 import { index } from '@/routes/artists'
 import Theme from '@/theme'
-import { Link, router } from '@inertiajs/vue3'
-import { onMounted, ref } from 'vue'
+import { Link, router, usePage } from '@inertiajs/vue3'
+import { computed, onMounted, ref } from 'vue'
 import UserDropdown from './Navbar/UserDropdown.vue'
+
+const page = usePage()
+const user = computed(() => page.props.auth.user)
 
 const logout = () => {
     router.flushAll()

@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Intervention\Validation\Rules\Username;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 
 class CreateNewUser implements CreatesNewUsers
@@ -48,7 +47,7 @@ class CreateNewUser implements CreatesNewUsers
 
         return User::create([
             'name' => $input['name'],
-            'username'  =>  strtolower($input['username']),
+            'username' => strtolower($input['username']),
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
             'musicianable_type' => Musician::class,

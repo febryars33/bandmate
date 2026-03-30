@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Musician;
 use App\Models\Recruitment;
 use Inertia\Inertia;
 
@@ -18,6 +19,7 @@ class HomeController extends Controller
                 'paragraph' => 'Platform kolaborasi musisi di seluruh Indonesia. Mulai karir musikmu bersama rekan yang tepat.',
             ],
             'recruitments' => Recruitment::limit(8)->get(),
+            'musicians' => Musician::limit(8)->get(),
         ]);
     }
 }

@@ -33,7 +33,6 @@
     },
     "dependencies": {
         "@inertiajs/vue3": "^2.3.7",
-        "@lottiefiles/dotlottie-wc": "^0.9.8",
         "@popperjs/core": "^2.11.8",
         "@tiptap/extension-character-count": "^3.21.0",
         "@tiptap/extension-link": "^3.21.0",

@@ -1,5 +1,4 @@
 import 'bootstrap';
-import '@lottiefiles/dotlottie-wc';
 import { createInertiaApp } from '@inertiajs/vue3';
 import {createBootstrap} from 'bootstrap-vue-next/plugins/createBootstrap'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'

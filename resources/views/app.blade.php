@@ -8,12 +8,12 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    @vite(['resources/scss/app.scss'])
+    @vite(['resources/scss/app.scss', 'resources/js/app.ts'])
 </head>
 
 <body class="bg-body-tertiary" style="display:none">
     @inertia
-    @vite(['resources/js/app.ts', "resources/js/Pages/{$page['component']}.vue"])
+    {{-- @vite(['resources/js/app.ts', "resources/js/Pages/{$page['component']}.vue"]) --}}
 
     <script>
         window.onload = () => {

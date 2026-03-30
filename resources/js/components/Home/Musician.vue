@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3 mb-4">
+            <div v-for="musician in musicians" class="col-lg-3 mb-4" :key="musician.id">
                 <div class="card h-100 p-4 text-center border-0 shadow-sm">
                     <div class="mb-4 mx-auto position-relative" style="width: 90px; height: 90px">
                         <img
@@ -24,7 +24,7 @@
                             style="width: 14px; height: 14px"
                         ></div>
                     </div>
-                    <h5 class="fw-bold mb-1">Andi Pratama</h5>
+                    <h5 class="fw-bold mb-1">{{ musician.real_name }}</h5>
                     <p class="small fw-bold mb-3">Gitaris · Rock</p>
                     <p class="small mb-4 d-flex align-items-center justify-content-center">
                         <i class="bi bi-geo-alt-fill me-2" />
@@ -39,5 +39,10 @@
 
 <script lang="ts" setup>
 import { home } from '@/routes'
+import type { Musician } from '@/types/models/musician'
 import { Link } from '@inertiajs/vue3'
+
+defineProps<{
+    musicians: Musician[]
+}>()
 </script>
